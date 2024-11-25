@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+<style>
+  .container {
+  max-width: 960px;
+}
+</style>
+
+<script src="https://www.paypal.com/sdk/js?client-id=AV7gkp9bqCT6IYdxhnSh4o9w4ZDHxsghpFDaC_kRkJXPJRnajExhpBFrtJwKBL6ng3roaMXMdtPOY5UB&components=buttons&locale=en_US"></script>
+
+</head>
+  <body class="bg-body-tertiary">
+  
+<div class="container">
+  <main>
+    <div class="py-5 text-center">
+      <h2>Checkout Test</h2>
+      <p class="lead">This form is made for tests in Paypal API sandbox</p>
+    </div>
+    
+    <form class="needs-validation" novalidate>
+
+    <div class="row g-5">
+      <div class="col-md-5 col-lg-6 order-md-last">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-primary">Your cart</span>
+          <span class="badge bg-primary rounded-pill">1</span>
+        </h4>
+        <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h5 class="my-0">{{products.name}}</h5> 
+              <small class="text-body-secondary">Item 1  #{{products.uid}}</small>
+            </div>
+            <h5 class="my-0">${{products.price|floatformat:2 }}</h5>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Total (USD)</span>
+            <strong>${{totalsum|floatformat:2 }}</strong>
+          </li>
+        </ul>
+        {{ json|json_script:'pdata' }}
+        <hr class="my-4">
+
+        <!-- BUTTON !!!!!!!!!!!!!!!!!!-->
+        {% csrf_token %}
+        <div id="paypal-button-container"></div>      
+
+      </div>
+      <div class="col-md-7 col-lg-6">
+        <h4 class="mb-3">Billing</h4>
+        
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <label for="firstName" class="form-label">First name</label>
+              <input type="text" class="form-control" id="firstName" value="Persona" required>
+              <div class="invalid-feedback">
+                Valid first name is required.
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <label for="lastName" class="form-label">Last name</label>
+              <input type="text" class="form-control" id="lastName" value="Doe" required>
+              <div class="invalid-feedback">
+                Valid last name is required.
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="phonenumber" class="form-label">Phone Number</label>
+              <div class="input-group has-validation">
+                <input type="text" class="form-control" id="phonenumber" value="4089163527" required>
+              <div class="invalid-feedback">
+                  Your phone number is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="email" class="form-label">Email </span></label>
+              <input type="email" class="form-control" id="email" value="sb-gd7g326993419@personal.example.com">
+              <div class="invalid-feedback">
+                Please enter a valid email address for shipping updates.
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="address" class="form-label">Address</label>
+              <input type="text" class="form-control" id="address" value="1 Main St" required>
+              <div class="invalid-feedback">
+                Please enter your shipping address.
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="address2" class="form-label">Address <span class="text-body-secondary">(line two)</span></label>
+              <input type="text" class="form-control" id="address2" value="San Jose">
+            </div>
+
+            <div class="col-md-5">
+              <label for="country" class="form-label">Country</label>
+              <select class="form-select" id="country" required>
+                <option value="US">Choose...</option>
+                <option>US</option>
+              </select>
+              <div class="invalid-feedback">
+                Please select a valid country.
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label for="state" class="form-label">State</label>
+              <select class="form-select" id="state" required>
+                <option value="CA">Choose...</option>
+                  <option>AL</option>
+                  <option>AK</option>
+                  <option>AR</option>
+                  <option>AZ</option>
+                  <option>CA</option>
+                  <option>KS</option>
+                  <option>NC</option>
+                  <option>SC</option>
+                  <option>CO</option>
+                  <option>CT</option>
+                  <option>ND</option>
+                  <option>SD</option>
+                  <option>FL</option>
+                  <option>GA</option>
+                  <option>HI</option>
+                  <option>RI</option>
+                  <option>IL</option>
+                  <option>IN</option>
+                  <option>IA</option>
+                  <option>KY</option>
+                  <option>LA</option>
+                  <option>ME</option>
+                  <option>MD</option>
+                  <option>MA</option>
+                  <option>MI</option>
+                  <option>MN</option>
+                  <option>MS</option>
+                  <option>MO</option>
+                  <option>MT</option>
+                  <option>NE</option>
+                  <option>NV</option>
+                  <option>NH</option>
+                  <option>NJ</option>
+                  <option>NY</option>
+                  <option>NM</option>
+                  <option>OK</option>
+                  <option>OH</option>
+                  <option>OR</option>
+                  <option>TN</option>
+                  <option>TX</option>
+                  <option>UT</option>
+                  <option>VT</option>
+                  <option>VA</option>
+                  <option>WV</option>
+                  <option>WA</option>
+                  <option>WI</option>
+                  <option>WY</option>
+              </select>
+              <div class="invalid-feedback">
+                Please provide a valid state.
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <label for="zip" class="form-label">Zip</label>
+              <input type="text" class="form-control" id="zip" value="95131" required>
+              <div class="invalid-feedback">
+                Zip code required.
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="my-5 pt-5 text-body-secondary text-center text-small">
+    <p class="mb-1">Caio Satiro</p>
+    <ul class="list-inline">
+      <li class="list-inline-item"><a href="https://github.com/kaiosatiro">github</a></li>
+      <li class="list-inline-item"><a href="https://www.linkedin.com/in/caio-satiro/">LinkedIn</a></li>
+    </ul>
+  </footer>
+</div>
+</body>
+<script>
+  paypal.Buttons({      
+    createOrder() {
+      const pdata = JSON.parse(document.getElementById('pdata').textContent);
+      var firstname = document.getElementById('firstName').value;
+      var lastname = document.getElementById('lastName').value;
+      var email = document.getElementById('email').value;
+      var phonenumber = document.getElementById('phonenumber').value;
+      var addressone = document.getElementById('address').value;
+      var addresstwo = document.getElementById('address2').value;
+      var state = document.getElementById('state').value;
+      var zipcode = document.getElementById('zip').value;
+      var country = document.getElementById('country').value;
+      return fetch("https://kaiosatiro.pythonanywhere.com/createorder", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firstname : firstname,
+          lastname : lastname,
+          email : email,
+          phonenumber : phonenumber,
+          addressone : addressone,
+          addresstwo : addresstwo,
+          state : state,
+          zipcode : zipcode,
+          country : country,
+          cart: [
+            { 
+              name: pdata.name,
+              sku: pdata.uid,
+              price: pdata.price,
+              quantity: "1"
+            }
+          ]
+        })
+      
+      })
+      // console.log(data)
+      .then((response) => response.json())
+      .then((order) => order.id);
+    },
+    onApprove(data) {
+      // console.log(data)
+      return fetch("https://kaiosatiro.pythonanywhere.com/checkout", {
+        method: "POST",
+        body: JSON.stringify({
+          orderID: data.orderID
+        })
+      })
+      .then((response) => response.json())
+      .then((details) => {  
+        window.location.replace(details.url)
+      })
+    },
+    // onCancel(data) {
+    // }
+  }).render('#paypal-button-container');
+
+</script>
+</html>
